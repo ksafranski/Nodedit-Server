@@ -1,0 +1,13 @@
+{
+  "name": "Nodedit-Server",
+  "version": "0.1.1",
+  "main": "server.js",
+  "dependencies": {
+    "restify": "~2.X.X",
+    "fs-extra": "~0.6.X"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules"
+  ]
+}

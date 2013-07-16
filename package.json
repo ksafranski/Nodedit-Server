@@ -1,0 +1,20 @@
+{
+  "name": "Nodedit-Server",
+  "version": "0.1.1",
+  "private": true,
+  "description": "A RESTful FileSystem API for the Nodedit Client",
+  "dependencies": {
+    "restify": "~2.X.X",
+    "fs-extra": "~0.6.X"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Fluidbyte/Node-FSAPI.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Fluidbyte/Node-FSAPI/issues"
+  },
+  "author": "Kent Safranski <kent@fluidbyte.net> (http://fluidbyte.net)",
+  "license": "MIT",
+  "readmeFilename": "README.md"
+}
