@@ -411,15 +411,12 @@ server.put(commandRegEx, function (req, res, next) {
         // Saves contents to a file
         case "save":
             
-            // Determine if binary
-            (req.params.binary) ? enc = "binary" : enc = "utf8";
-            
             // Make sure it exists
             if (fs.existsSync(path)) {
                 // Make sure it's a file
                 if (!fs.lstatSync(path).isDirectory()) {
-                    // Write
-                    fs.writeFile(path, req.params.data, enc, function(err) {
+                    // Write (binary encoding supports text and binary files)
+                    fs.writeFile(path, req.params.data, 'binary', function(err) {
                         if(err) {
                             resError(107, err, res);
                         } else {
