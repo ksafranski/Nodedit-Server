@@ -9,10 +9,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/Fluidbyte/Node-FSAPI.git"
+    "url": "git://github.com/Fluidbyte/Node-Server.git"
   },
   "bugs": {
-    "url": "https://github.com/Fluidbyte/Node-FSAPI/issues"
+    "url": "https://github.com/Fluidbyte/Node-Server/issues"
   },
   "author": "Kent Safranski <kent@fluidbyte.net> (http://fluidbyte.net)",
   "license": "MIT",

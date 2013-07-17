@@ -24,7 +24,7 @@ var config = {
     // Port designation
     port: 8080,
     // Base directory
-    base: "example/base",
+    base: "workspace",
     // Default create mode
     cmode: "0755"
 };
