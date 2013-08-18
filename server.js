@@ -1,6 +1,6 @@
 // Define Configuration
 
-var config = {
+var defaults = {
     // Authentication keys
     keys: [
         "12345",
@@ -28,6 +28,25 @@ var config = {
     // Default create mode
     cmode: "0755"
 };
+var config = defaults;
+
+// i look each arg in the command line args
+process.argv.forEach(function(value, index, array) {
+    // if it's not arg 0 and arg 1 ( normally arg 0 is node and arg1 is server.js )
+    if(index != 0 && index != 1) {
+        // split the arg by =
+        value = value.split("=");
+        // if it's something like base=/some/dir
+        if(value.length == 2) {
+            // if the name starts with -- ( like --port=1234 )
+            if(value[0].substr(0, 2) == "--")
+                // then remove the -- part
+                value[0] = value[0].substr(2);
+            // set the new value for config
+            config[value[0]] = value[1];
+        }
+    }
+});
 
 
 var fs = require("fs-extra"),
