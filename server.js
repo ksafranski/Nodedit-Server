@@ -28,7 +28,11 @@ var defaults = {
     // Default create mode
     cmode: "0755"
 };
-var config = defaults;
+
+var config = defaults, 
+    fs = require("fs-extra"),
+    restify = require("restify"),
+    server;
 
 // i look each arg in the command line args
 process.argv.forEach(function(value, index, array) {
@@ -42,16 +46,20 @@ process.argv.forEach(function(value, index, array) {
             if(value[0].substr(0, 2) == "--")
                 // then remove the -- part
                 value[0] = value[0].substr(2);
-            // set the new value for config
-            config[value[0]] = value[1];
+            // if I'm dealing with config
+            if(value[0] == "config") {
+                // save the json configuration in a variable
+                var new_config = JSON.parse(fs.readFileSync(value[1]));
+                // for each index in the variable new_config
+                for(cindex in new_config)
+                    // add it to config
+                    config[cindex] = new_config[cindex];
+            }else
+                // set the new value for config
+                config[value[0]] = value[1];
         }
     }
 });
-
-
-var fs = require("fs-extra"),
-    restify = require("restify"),
-    server;
 
 // Determine if SSL is used
 if (config.ssl.key && config.ssl.cert) {
