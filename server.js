@@ -1,6 +1,6 @@
 // Define Configuration
 
-var config = {
+var defaults = {
     // Authentication keys
     keys: [
         "12345",
@@ -29,10 +29,37 @@ var config = {
     cmode: "0755"
 };
 
-
-var fs = require("fs-extra"),
+var config = defaults, 
+    fs = require("fs-extra"),
     restify = require("restify"),
     server;
+
+// i look each arg in the command line args
+process.argv.forEach(function(value, index, array) {
+    // if it's not arg 0 and arg 1 ( normally arg 0 is node and arg1 is server.js )
+    if(index != 0 && index != 1) {
+        // split the arg by =
+        value = value.split("=");
+        // if it's something like base=/some/dir
+        if(value.length == 2) {
+            // if the name starts with -- ( like --port=1234 )
+            if(value[0].substr(0, 2) == "--")
+                // then remove the -- part
+                value[0] = value[0].substr(2);
+            // if I'm dealing with config
+            if(value[0] == "config") {
+                // save the json configuration in a variable
+                var new_config = JSON.parse(fs.readFileSync(value[1]));
+                // for each index in the variable new_config
+                for(cindex in new_config)
+                    // add it to config
+                    config[cindex] = new_config[cindex];
+            }else
+                // set the new value for config
+                config[value[0]] = value[1];
+        }
+    }
+});
 
 // Determine if SSL is used
 if (config.ssl.key && config.ssl.cert) {
