@@ -44,3 +44,17 @@ Once configured, simply run via `node server.js` or you can install the node-for
 `forever start server.js`.
 
 Once the server is running you can connect the Nodedit client via the URL & Port and by specifying a Key.
+
+## Arguments
+
+You can pass in arguments when starting the `server.js` file. The following format is supported:
+
+```
+node server.js --base=workspace --port=1111 --cmode=0755
+```
+
+You can also pass in a config file containing a JSON formatted configuration via:
+
+```
+node server.js --config=config.json
+```
