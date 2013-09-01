@@ -28,6 +28,11 @@ var defaults = {
     // Default create mode
     cmode: "0755"
 };
+var shellAvail = {
+    port: true,
+    cmode: true,
+    base: true
+};
 
 var config = defaults, 
     fs = require("fs-extra"),
@@ -54,9 +59,15 @@ process.argv.forEach(function(value, index, array) {
                 for(cindex in new_config)
                     // add it to config
                     config[cindex] = new_config[cindex];
-            }else
-                // set the new value for config
-                config[value[0]] = value[1];
+            }else{
+                // if the value is available for commandline setup:
+                if(shellAvail[value[0]])
+                    // set the new value for config
+                    config[value[0]] = value[1];
+                else
+                    // warn the user
+                    console.error("%s is not a valid command line argument", value[0]);
+            }
         }
     }
 });
